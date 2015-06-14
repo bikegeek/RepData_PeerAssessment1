@@ -31,7 +31,7 @@ output:
 ```
 
 
-## What is the average daily activity pattern?
+## What is the median daily activity pattern?
 ```{r median steps}
     mediansteps <- median(sumsteps$steps)
     print(mediansteps)
