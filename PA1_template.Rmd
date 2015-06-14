@@ -19,6 +19,7 @@ output:
     sumsteps <- dcast(melted, date~variable,sum)
 ```  
 
+# What is the average daily activity pattern?
 
 ## What is mean total number of steps taken per day?
 ```{r mean steps}
@@ -27,14 +28,15 @@ output:
 ```
 
 
-## What is the median daily activity pattern?
+
+## Median Number of steps taken per day?
 ```{r median steps}
     mediansteps <- median(sumsteps$steps)
     print(mediansteps)
 ```  
 
-####Histogram
-```{r histogram,fig.height=4, fig.width=4,echo=FALSE}
+#### Histogram
+```{r histogram,fig.height=4, fig.width=4}
     #One for the output
     hist(sumsteps$steps,xlab="Total Number of Daily Steps",
          main="Total number of steps (ignore NA's)")
@@ -46,7 +48,7 @@ output:
     dev.off()
 ```  
 
-##Average Daily Activity Pattern
+## Average Daily Activity Pattern
 ```{r timeseries}
     #Calculate the average for each 5 minute interval over all the days
     meantimeseries <- dcast(melted,interval~variable,mean)
@@ -56,7 +58,7 @@ output:
     png(file="timeseries.png", height=480, width=480)
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
-         xlab="Time Interval (seconds)",
+         xlab="Time Interval (minuyrd)",
          ylab="Avg # steps across all days",
          main="Timeseries plot (ignore NA's)")
     dev.off()
@@ -64,35 +66,37 @@ output:
     #Create a figure that is viewed in the knitr output
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
-         xlab="Time Interval (seconds)",
+         xlab="Time Interval (minutes)",
          ylab="Avg # steps across all days",
          main="Timeseries plot (ignore NA's)")
     
     
 ```  
 
-###Time interval with the maximum number of steps (averaged across all days):
-```{r time interval with max steps}
+
+## Time interval with the maximum number of steps (averaged across all days):
+```{r timeintervalmaxsteps}
     index<-which.max(meantimeseries$steps)
-    print(cat( meantimeseries[index,1], " second interval"))
+    print("5-minute interval with the maximum number of steps=")
+    print(meantimeseries[index,1])
 ```  
 
 ## Imputing missing values
 
-####1.  Total number of missing values (NA) in dataset
+### 1.  Total number of missing values (NA) in dataset:
 ```{r number of NAs}
     num.missing <- as.numeric(sum(is.na(df$steps)))
     print("Number of NA's for step data: ")
     print(num.missing)
 ```  
 
-####2.  Strategy for filling in the missing values
+### 2.  Strategy for filling in the missing values:
 Replace each *NA* with the mean value that corresponds to the 5-minute interval
 of the missing value.  The mean value for each 5-minute interval is available
 from the time-series calculation we performed earlier.  
 
 
-####3.  Create a new dataset with missing values filled in with the median value
+### 3.  Create a new dataset with missing values filled in with the median value:
 ```{r fill missing data}
     missingindices <- which(is.na(raw$steps))
     rawdata <- df
@@ -115,10 +119,10 @@ from the time-series calculation we performed earlier.
 
 ```  
 
-####4. Make histogram, calculate and report the mean and median total number of steps taken per day.
+### 4. Make histogram, calculate and report the mean and median total number of steps taken per day.
 
-####Histogram- Filled Data
-```{r histogram filled data,fig.height=4, fig.width=4,echo=FALSE}
+### Histogram- Filled Data:
+```{r histogram filled data,fig.height=4, fig.width=4}
     melted <- melt(rawdata,id=c(2:3),measure=c(1),na.rm=TRUE)
     sumsteps2 <- dcast(melted, date~variable,sum)
     #One for the output
@@ -131,19 +135,19 @@ from the time-series calculation we performed earlier.
          main="Total Number of steps (filled data)")
     dev.off()
 ```  
-####Comments:
+### Comments:
 Replacing the missing data with the average number of steps (that correspond to
 the time interval) increased the frequency of the number of averages steps but
 did not change the "shape" of the histogram.
 
 
-####Filled Data-Mean total number of steps taken per day:
+### Filled Data-Mean total number of steps taken per day:
 ```{r mean steps-filled data}
     meansteps2 <- mean(sumsteps2$steps)
     print(meansteps2)
 ```
 
-####Filled Data-Median number of total daily steps:
+#### Filled Data-Median number of total daily steps:
 ```{r median steps- filled data}
     mediansteps2 <- median(sumsteps2$steps)
     print(mediansteps2)
@@ -151,7 +155,7 @@ did not change the "shape" of the histogram.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r daysofweek,echo=FALSE, fig.width=4, fig.height=8 }
+```{r daysofweek, fig.width=4, fig.height=8}
     rawdata$date <- as.Date(rawdata$date)
     wday <- weekdays(rawdata$date)
     for(i in 1:length(wday)){
@@ -203,7 +207,7 @@ did not change the "shape" of the histogram.
 
 ```  
 
-####Comments:
+### Comments:
 There are more steps taken throughout the day on weekends, especially from the
 1000 sec to ~1800 sec interval.  The number of steps taken are also taken later
 on the weekend mornings, consistent with sleeping-in on the weekends.
