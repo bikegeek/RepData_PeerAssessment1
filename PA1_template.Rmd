@@ -1,7 +1,11 @@
+opts_chunk$set(cache=F)
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output:   html_document
-keep_md: true
+output:   
+    html_document:
+        fig_width: 4
+        fig_height: 4
+        keep_md: true
 ---
 
 
@@ -147,7 +151,7 @@ did not change the "shape" of the histogram.
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r days of week,echo=FALSE, fig.width=4, fig.height=8 }
+```{r daysofweek,echo=FALSE, fig.width=4, fig.height=8 }
     rawdata$date <- as.Date(rawdata$date)
     wday <- weekdays(rawdata$date)
     for(i in 1:length(wday)){
@@ -203,6 +207,8 @@ did not change the "shape" of the histogram.
 There are more steps taken throughout the day on weekends, especially from the
 1000 sec to ~1800 sec interval.  The number of steps taken are also taken later
 on the weekend mornings, consistent with sleeping-in on the weekends.
+
+
 
 
 
