@@ -1,13 +1,9 @@
-PA1_template.md
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 output:
+<!-- rmarkdown v1 -->
   html_document:
-    fig_height: 4
-    fig_width: 8
-    keep_md: yes
-  pdf_document: default
-  word_document: default
+    keep_md:true
 ---
 
 

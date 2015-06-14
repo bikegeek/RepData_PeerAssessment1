@@ -1,13 +1,9 @@
-<!-- rmarkdown v1 -->
-
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 output:
+<!-- rmarkdown v1 -->
   html_document:
-    fig_height: 7
-    keep_md: yes
-  pdf_document: default
-  word_document: default
+    keep_md:true
 ---
 
 
@@ -37,7 +33,7 @@ output:
 ```
 
 
-## What is the average daily activity pattern?
+## What is the median daily activity pattern?
 
 ```r
     mediansteps <- median(sumsteps$steps)
