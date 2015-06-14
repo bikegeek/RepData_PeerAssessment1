@@ -1,11 +1,12 @@
-opts_chunk$set(cache=F)
+<!-- rmarkdown v1 -->
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output:   
-    html_document:
-        fig_width: 4
-        fig_height: 4
-        keep_md: true
+title: 'Reproducible Research: Peer Assessment 1'
+output:
+  html_document:
+    fig_height: 7
+    keep_md: yes
+  pdf_document: default
+  word_document: default
 ---
 
 
