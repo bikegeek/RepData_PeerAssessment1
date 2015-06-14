@@ -68,7 +68,8 @@ output:
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
          xlab="Time Interval (seconds)",
-         ylab="Avg # steps across all days")
+         ylab="Avg # steps across all days",
+         main="Timeseries plot (ignore NA's)")
     dev.off()
 ```
 

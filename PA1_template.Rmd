@@ -1,10 +1,10 @@
-<!-- rmarkdown v1 -->
-
+PA1_template.md
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 output:
   html_document:
-    fig_height: 7
+    fig_height: 4
+    fig_width: 8
     keep_md: yes
   pdf_document: default
   word_document: default
@@ -40,13 +40,13 @@ output:
 ####Histogram
 ```{r histogram,fig.height=4, fig.width=4,echo=FALSE}
     #One for the output
-    hist(sumsteps$steps,xlab="Total Number of Daily Steps (ignore NA's)",
-         main="Total number of steps taken each day")
+    hist(sumsteps$steps,xlab="Total Number of Daily Steps",
+         main="Total number of steps (ignore NA's)")
     #Generate a plot that can be checked into github or attached to some
     #other document...
     png(file="hist.png",height=480,width=480)
     hist(sumsteps$steps,xlab="Total Number of Daily Steps",
-         main="Total number of steps taken each day")
+         main="Total number of steps (ignore NA's)")
     dev.off()
 ```  
 
@@ -61,7 +61,8 @@ output:
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
          xlab="Time Interval (seconds)",
-         ylab="Avg # steps across all days")
+         ylab="Avg # steps across all days",
+         main="Timeseries plot (ignore NA's)")
     dev.off()
 
     #Create a figure that is viewed in the knitr output
@@ -126,7 +127,7 @@ from the time-series calculation we performed earlier.
     sumsteps2 <- dcast(melted, date~variable,sum)
     #One for the output
     hist(sumsteps2$steps,xlab="Total Number of Daily Steps",
-         main="Total number of steps taken each day")
+         main="Total number of steps (filled data)")
     #Generate a plot that can be checked into github or attached to some
     #other document...
     png(file="filledhist.png",height=480,width=480)
