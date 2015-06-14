@@ -1,4 +1,5 @@
 <!-- rmarkdown v1 -->
+
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 output:
@@ -39,7 +40,7 @@ output:
 ####Histogram
 ```{r histogram,fig.height=4, fig.width=4,echo=FALSE}
     #One for the output
-    hist(sumsteps$steps,xlab="Total Number of Daily Steps",
+    hist(sumsteps$steps,xlab="Total Number of Daily Steps (ignore NA's)",
          main="Total number of steps taken each day")
     #Generate a plot that can be checked into github or attached to some
     #other document...
@@ -67,7 +68,8 @@ output:
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
          xlab="Time Interval (seconds)",
-         ylab="Avg # steps across all days")
+         ylab="Avg # steps across all days",
+         main="Timeseries plot (ignore NA's)")
     
     
 ```  
@@ -129,7 +131,7 @@ from the time-series calculation we performed earlier.
     #other document...
     png(file="filledhist.png",height=480,width=480)
     hist(sumsteps2$steps,xlab="Total Number of Daily Steps",
-         main="Total number of steps taken each day (filled data")
+         main="Total Number of steps (filled data)")
     dev.off()
 ```  
 ####Comments:

@@ -1,4 +1,5 @@
 <!-- rmarkdown v1 -->
+
 ---
 title: 'Reproducible Research: Peer Assessment 1'
 output:
@@ -81,7 +82,8 @@ output:
     plot(meantimeseries$interval,
          meantimeseries$steps,type="l",
          xlab="Time Interval (seconds)",
-         ylab="Avg # steps across all days")
+         ylab="Avg # steps across all days",
+         main="Timeseries plot (ignore NA's)")
 ```
 
 ![plot of chunk timeseries](figure/timeseries-1.png) 
