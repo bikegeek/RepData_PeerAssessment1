@@ -16,6 +16,7 @@ output:
     data<-na.omit(df)
     data$steps <- as.numeric(data$steps)
     data$interval <- as.numeric(data$interval)
+    #Reshape data to make calculating the sum, mean and median easier.
     melted <- melt(data,id=c(2:3),measure=c(1),na.rm=TRUE)
     sumsteps <- dcast(melted, date~variable,sum)
 ```
@@ -153,6 +154,7 @@ from the time-series calculation we performed earlier.
 ### 3.  Create a new dataset with missing values filled in with the median value:
 
 ```r
+    #Determine the indices corresponding to NA values
     missingindices <- which(is.na(raw$steps))
     rawdata <- df
     #Replace each NA with the average number of steps for the interval that
@@ -178,6 +180,7 @@ from the time-series calculation we performed earlier.
 ### Histogram- Filled Data:
 
 ```r
+    #As before, reshape data for ease in determining the mean and median.
     melted <- melt(rawdata,id=c(2:3),measure=c(1),na.rm=TRUE)
     sumsteps2 <- dcast(melted, date~variable,sum)
     #One for the output
@@ -232,7 +235,9 @@ did not change the "shape" of the histogram.
 ## Are there differences in activity patterns between weekdays and weekends?
 
 ```r
+    #Convert the string date into Date objects
     rawdata$date <- as.Date(rawdata$date)
+    #Determine which dates are weekends or weekdays
     wday <- weekdays(rawdata$date)
     for(i in 1:length(wday)){
        if (wday[i] =="Sunday" || wday[i] =="Saturday"){
@@ -244,6 +249,8 @@ did not change the "shape" of the histogram.
     }
     dayofweek <- as.factor(wday)
 
+    #Add the days of the week to the data frame, subset the data into weekend 
+    #and weekday, then reshape to determine the mean.
     rawdata$dayofweek <-cbind(c(wday))
     weekdays.data <- subset(rawdata,dayofweek=="weekday")
     weekends.data <- subset(rawdata,dayofweek=="weekend")
@@ -251,6 +258,8 @@ did not change the "shape" of the histogram.
     melted.weekend <- melt(weekends.data, id=c(2:4),measure=c(1),na.rm=FALSE)
     meantimeseries.weekday <- dcast(melted.weekday,interval~variable,mean)
     meantimeseries.weekend <- dcast(melted.weekend,interval~variable,mean)
+
+    #Generate the panel of time series plots.
     png(file="dayofweek.png", height=480, width=480)
     par(mfrow=c(2,1))
     plot(meantimeseries.weekday$interval,
